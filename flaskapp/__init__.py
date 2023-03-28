@@ -2,15 +2,21 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from pathlib import Path
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
 
+PROJECT_ROOT = Path(__file__).parent
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    # configure the SQLite database location
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(
+        PROJECT_ROOT.joinpath("data", "database.db")
+    )
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SQLALCHEMY_ECHO"] = True
     db.init_app(app)
 
     from .views import views
