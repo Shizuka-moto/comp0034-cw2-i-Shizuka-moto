@@ -5,7 +5,6 @@ setup(
     name="comp0034-cw2-i-Shizuka-moto",
     version="1.0",
     packages=["flaskapp"],
-    package_dir={"": "src"},
     include_package_data=True,
     install_requires=["flask", "pandas", "flask-sqlalchemy", "openpyxl", "flask-wtf", "flask-login"],
 )
