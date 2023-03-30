@@ -34,6 +34,21 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
+@auth.route('/Education_expenditure')
+@login_required
+def Education_expenditure():
+    return "<p>Education expenditure</p>"
+
+@auth.route('/Education_enrolment')
+@login_required
+def Education_enrolment():
+    return "<p>Education enrolment</p>"
+
+@auth.route('/Institute_distribution')
+@login_required
+def Institute_distribution():
+    return "<p>Institute distribution</p>"
+
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
