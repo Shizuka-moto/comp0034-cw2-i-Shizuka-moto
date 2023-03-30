@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Expenditure, Enrolment, institutional_distribution
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -34,10 +34,21 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-@auth.route('/Education_expenditure')
+
+@auth.route('/Education_expenditure', methods=['GET', 'POST'])
 @login_required
 def Education_expenditure():
-    return "<p>Education expenditure</p>"
+    if request.method == 'POST':
+        Years = request.form.get('Years')
+        Time = Expenditure.query.filter_by(Years=Years).first()
+        if Time:
+            flash('Data found!', category='success')
+            judge = True
+        else:
+            flash('Data have not found', category='error')
+            judge = False
+    return render_template("expenditure.html", user=current_user,)
+
 
 @auth.route('/Education_enrolment')
 @login_required

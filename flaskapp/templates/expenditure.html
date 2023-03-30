@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Expenditure data search{% endblock %} {% block content
+    %}
+    <form method="POST">
+      <h3 align="center">Expenditure data search</h3>
+      <div class="form-group">
+        <label for="Years">Specific year of data you want to check</label>
+        <input
+          type="Years"
+          class="form-control"
+          id="Years"
+          name="Years"
+          placeholder="Enter the year"
+        />
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% endblock %}
