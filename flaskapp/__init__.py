@@ -4,9 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from pathlib import Path
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
-
+ma = Marshmallow()
 PROJECT_ROOT = Path(__file__).parent
 
 def create_app():
@@ -19,15 +20,18 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SQLALCHEMY_ECHO"] = True
     db.init_app(app)
-
+    ma.init_app(app) 
+    
     from .views import views
     from .auth import auth
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-
-    from .models import User, Note
     
+    from .models import User, Expenditure, Enrolment, institutional_distribution
+    with app.app_context():
+        from .models import User, Expenditure, Enrolment, institutional_distribution
+    from .models import User, Expenditure, Enrolment, institutional_distribution
     with app.app_context():
         db.create_all()
 
