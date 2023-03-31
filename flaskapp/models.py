@@ -1,5 +1,5 @@
 
-from . import db
+from . import db, ma
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 import pandas as pd
@@ -53,3 +53,5 @@ class institutional_distribution(db.Model):
     def __repr__(self):
         clsname = self.__class__.__name__
         return f"{clsname}: <{self.Years}, {self.TOTAL}, {self.Central_Government}, {self.LEA}, {self.UGC}>"
+    
+    
