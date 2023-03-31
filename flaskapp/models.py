@@ -21,9 +21,9 @@ class User(db.Model, UserMixin):
 class Expenditure(db.Model):
     __tablename__ = "Expenditure"
     Years = db.Column(db.Integer, primary_key=True)
-    Current_prices = db.Column(db.String)
-    Education_Price_Index = db.Column(db.String)
-    Constant_1990_prices = db.Column(db.String)
+    Current_prices = db.Column(db.String(150))
+    Education_Price_Index = db.Column(db.String(150))
+    Constant_1990_prices = db.Column(db.String(150))
 
     def __repr__(self):
         clsname = self.__class__.__name__

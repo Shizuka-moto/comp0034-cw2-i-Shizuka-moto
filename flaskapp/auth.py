@@ -38,27 +38,42 @@ def logout():
 @auth.route('/Education_expenditure', methods=['GET', 'POST'])
 @login_required
 def Education_expenditure():
+    Time = None
     if request.method == 'POST':
         Years = request.form.get('Years')
         Time = Expenditure.query.filter_by(Years=Years).first()
         if Time:
             flash('Data found!', category='success')
-            judge = True
         else:
-            flash('Data have not found', category='error')
-            judge = False
-    return render_template("expenditure.html", user=current_user,)
+            flash('Data not found', category='error')
+    return render_template("expenditure.html", Expenditure=Time, user=current_user)
 
 
-@auth.route('/Education_enrolment')
+@auth.route('/Education_enrolment', methods=['GET', 'POST'])
 @login_required
 def Education_enrolment():
-    return "<p>Education enrolment</p>"
+    Time = None
+    if request.method == 'POST':
+        Years = request.form.get('Years')
+        Time = Enrolment.query.filter_by(Years=Years).first()
+        if Time:
+            flash('Data found!', category='success')
+        else:
+            flash('Data not found', category='error')
+    return render_template("enrolment.html", Enrolment=Time, user=current_user)
 
-@auth.route('/Institute_distribution')
+@auth.route('/Institute_distribution', methods=['GET', 'POST'])
 @login_required
 def Institute_distribution():
-    return "<p>Institute distribution</p>"
+    Time = None
+    if request.method == 'POST':
+        Years = request.form.get('Years')
+        Time = institutional_distribution.query.filter_by(Years=Years).first()
+        if Time:
+            flash('Data found!', category='success')
+        else:
+            flash('Data not found', category='error')
+    return render_template("institutional_distribution.html", institutional_distribution=Time, user=current_user)
 
 
 @auth.route('/sign-up', methods=['GET', 'POST'])

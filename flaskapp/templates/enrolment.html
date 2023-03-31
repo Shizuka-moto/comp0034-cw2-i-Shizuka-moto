@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Number of enrolment data search{% endblock %} {% block content
+    %}
+    <form method="POST">
+      <h3 align="center">UK number of enrolment data search</h3>
+      <div class="form-group">
+        <label for="Years">Specific year of data you want to check</label>
+        <input
+          type="Years"
+          class="form-control"
+          id="Years"
+          name="Years"
+          placeholder="Enter the year"
+        />
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <br />
+      {% if user %}
+        {% if Enrolment %}
+          <h2>Result for year {{ Enrolment.Years }}</h2>
+          <p>TOTAL number of enrolment people: {{ Enrolment.TOTAL }}</p>
+          <p>Primaire level population: {{ Enrolment.Primaire }}</p>
+          <p>Secondaire level population: {{ Enrolment.Secondaire }}</p>
+          <p>Higher_education level population: {{ Enrolment.Higher_education }}</p>
+          <p>Special level population: {{ Enrolment.Special }}</p>
+          <p>Further_Education  population: {{ Enrolment.Further_Education }}</p>
+        {% else %}
+          <p>Enter a number between 1854 and 2019 please.</p>
+        {% endif %}
+      {% endif %}
+    {% endblock %}
