@@ -10,8 +10,9 @@ db = SQLAlchemy()
 ma = Marshmallow()
 PROJECT_ROOT = Path(__file__).parent
 
-def create_app():
+def create_app(config_object):
     app = Flask(__name__)
+    app.config.from_object(config_object)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     # configure the SQLite database location
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(

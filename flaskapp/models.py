@@ -1,22 +1,21 @@
-
-from . import db, ma
+from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 import pandas as pd
 
 
-class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
-    password = db.Column(db.String(150))
-    first_name = db.Column(db.String(150))
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String)
+    first_name = db.Column(db.String)
     notes = db.relationship('Note')
+    
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.String)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Expenditure(db.Model):
     __tablename__ = "Expenditure"
@@ -53,5 +52,3 @@ class institutional_distribution(db.Model):
     def __repr__(self):
         clsname = self.__class__.__name__
         return f"{clsname}: <{self.Years}, {self.TOTAL}, {self.Central_Government}, {self.LEA}, {self.UGC}>"
-    
-    
