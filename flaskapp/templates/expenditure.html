@@ -1,34 +1,37 @@
-{% extends "base.html" %} {% block title %}Public expenditure on education in the UK 1833-2019{% endblock %} {% block content
-    %}
-    <form method="POST">
-      <h3 align="center">UK public expenditure on education</h3>
-      <div class="form-group">
-        <label for="Years">Specific year of data you want to check</label>
-        <input
-          type="Years"
-          class="form-control"
-          id="Years"
-          name="Years"
-          placeholder="Enter the year"
-        />
-      </div>
-      <br />
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <a href="https://en.wikipedia.org/wiki/Price_index#:~:text=A%20price%20index%20(plural%3A%20%22,a%20given%20interval%20of%20time.">
+{% extends "base.html" %}
+
+{% block title %}Public expenditure on education in the UK 1833-2019{% endblock %}
+
+{% block content %}
+  <form method="POST">
+    <h3 align="center">UK public expenditure on education</h3>
+    <div class="form-group">
+      <label for="Years">Specific year of data you want to check</label>
+      <input
+        type="Years"
+        class="form-control"
+        id="Years"
+        name="Years"
+        placeholder="Enter the year"
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="https://en.wikipedia.org/wiki/Price_index#:~:text=A%20price%20index%20(plural%3A%20%22,a%20given%20interval%20of%20time.">
       <button type="button" class="btn btn-secondary">What does price index mean for everyone?</button>
-      </a>
-      <a href="https://www.economicshelp.org/blog/glossary/current-prices-constant-prices/">
+    </a>
+    <a href="https://www.economicshelp.org/blog/glossary/current-prices-constant-prices/">
       <button type="button" class="btn btn-secondary">Don't know what is current price and constant price respectively?</button>
-      </a>
-      <br />
-      {% if user %}
-        {% if Expenditure %}
-          <h2>Result for year {{ Expenditure.Years }}</h2>
-          <p>Current_prices in thousands: {{ Expenditure.Current_prices }}</p>
-          <p>Education_Price_Index 1990 = 100: {{ Expenditure.Education_Price_Index }}</p>
-          <p>Constant_1990_prices in thousands: {{ Expenditure.Constant_1990_prices }}</p>
-        {% else %}
-          <p>Enter a number between 1833 and 2019 please.</p>
-        {% endif %}
+    </a>
+    <br />
+    {% if user %}
+      {% if Expenditure %}
+        <h2>Result for year {{ Expenditure.Years }}</h2>
+        <p>Current_prices in thousands: {{ Expenditure.Current_prices }}</p>
+        <p>Education_Price_Index 1990 = 100: {{ Expenditure.Education_Price_Index }}</p>
+        <p>Constant_1990_prices in thousands: {{ Expenditure.Constant_1990_prices }}</p>
+      {% else %}
+        <p>Enter a number between 1833 and 2019 please.</p>
       {% endif %}
-    {% endblock %}
+    {% endif %}
+  {% endblock %}

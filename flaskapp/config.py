@@ -1,12 +1,11 @@
-"""Flask configuration."""
 from pathlib import Path
 
-# Sets the project root folder
+# Define the project root path
 PROJECT_ROOT = Path(__file__).parent
 
 
 class Config:
-    """Base config."""
+    """Base configuration class."""
 
     SECRET_KEY = "YY3R4fQ5OmlmVKOSlsVHew"
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + str(
@@ -17,13 +16,13 @@ class Config:
 
 
 class ProdConfig(Config):
-    """Production config not currently implemented."""
+    """Production configuration class."""
 
     pass
 
 
 class DevConfig(Config):
-    """Development config"""
+    """Development configuration class."""
 
     FLASK_ENV = "development"
     DEBUG = True
@@ -31,9 +30,8 @@ class DevConfig(Config):
 
 
 class TestConfig(Config):
-    """Testing config"""
+    """Testing configuration class."""
 
     TESTING = True
     SQLALCHEMY_ECHO = False
     WTF_CSRF_ENABLED = False
-    # SERVER_NAME = "127.0.0.1:5000"

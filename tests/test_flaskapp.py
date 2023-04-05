@@ -1,5 +1,18 @@
+# Import the required module
 from flaskapp.models import User
+from flaskapp.schemas import UserSchema, NoteSchema, ExpenditureSchema, EnrolmentSchema, institutional_distributionSchema
+from flaskapp import db
 
+users_schema = UserSchema(many=True)
+user_schema = UserSchema()
+notes_schema = NoteSchema(many=True)
+note_schema = NoteSchema()
+expens_schema = ExpenditureSchema(many=True)
+expen_schema = ExpenditureSchema()
+enrols_schema = EnrolmentSchema(many=True)
+enrol_schema = EnrolmentSchema()
+insts_schema = institutional_distributionSchema(many=True)
+inst_schema = institutional_distributionSchema()
 
 def test_index(test_client):
     """
@@ -9,22 +22,25 @@ def test_index(test_client):
     """
     response = test_client.get("/")
     assert response.status_code == 302
-    
-    
+
+
 def test_home(test_client):
+    """Test the login page."""
     response = test_client.get("/login")
     assert response.status_code == 200
     assert b"Login" in response.data
-    
-    
+
+
 def test_registration(test_client, app):
+    """Test the registration process."""
     response = test_client.post("/sign-up", data={"email": "test@test.com", "firstName": "testfirstname", "password1": "114302ab", "password2": "114302ab"})
 
     with app.app_context():
         assert User.query.offset(1).first().email == "test@test.com"
-        
-        
+
+
 def test_whether_login_successfully(test_client):
+    """Test whether the login process is successful."""
     test_client.post("/sign-up", data={"email": "test@test.com", "firstName": "testfirstname", "password1": "114302ab", "password2": "114302ab"})
     test_client.post("/login", data={"email": "test@test.com", "password": "114302ab"})
 
@@ -34,7 +50,9 @@ def test_whether_login_successfully(test_client):
     assert b"Please leave any of your advice and report mistake here" in response.data
     assert b"Note added!" in responses.data
 
+
 def test_Education_expenditure_page(test_client):
+    """Test the Education Expenditure page."""
     test_client.post("/sign-up", data={"email": "test@test.com", "firstName": "testfirstname", "password1": "114302ab", "password2": "114302ab"})
     test_client.post("/login", data={"email": "test@test.com", "password": "114302ab"})
 
@@ -44,8 +62,10 @@ def test_Education_expenditure_page(test_client):
     assert b"UK public expenditure on education" in response.data
     assert b"Current_prices in thousands: 57.5" in responses.data
     assert b"Data found!" in responses.data
-    
+
+
 def test_Education_enrolment_page(test_client):
+    """Test the Education Enrolment page."""
     test_client.post("/sign-up", data={"email": "test@test.com", "firstName": "testfirstname", "password1": "114302ab", "password2": "114302ab"})
     test_client.post("/login", data={"email": "test@test.com", "password": "114302ab"})
 
@@ -55,8 +75,10 @@ def test_Education_enrolment_page(test_client):
     assert b"UK number of enrolment data search" in response.data
     assert b"TOTAL number of enrolment people: 461445.0" in responses.data
     assert b"Data found!" in responses.data
-    
+
+
 def test_Institute_distribution_page(test_client):
+    """Test the Institute Distribution page."""
     test_client.post("/sign-up", data={"email": "test@test.com", "firstName": "testfirstname", "password1": "114302ab", "password2": "114302ab"})
     test_client.post("/login", data={"email": "test@test.com", "password": "114302ab"})
 
