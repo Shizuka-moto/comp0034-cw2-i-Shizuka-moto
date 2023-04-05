@@ -23,7 +23,7 @@ In templates folder, the "base.html" file is the main template for all the other
 2. How flask app run?
 In a file called "main.py" outside the "flaskapp“ folder, this file call the "flaskapp" folder and initialise the flask app. And "__init__.py" file in "flaskapp" folder would run automatically.
 In the "__init__.py" file, database and configuration information was definded. And also connect blueprints file and all other python file together. This file also define the location of database.
-"auth.py" file define how every page work, which HTTP method used and also which template is used. Error handling function is also defined in this file. 
+"auth.py" file define how every page work, which HTTP method used and also which template is used. Error handling function is also defined in this file. Import flask-login library to make sure user could only access specific page after login.
 "config.py" file define the configuration of flask app, this is quiet important when we test the app.
 "models.py" file define every table in database file, type of data is stored in this file. Every class has a primary key column for identification purpose. The class note and user connect with each other cause note has to insert with specific user. In other words, user could only insert note information to database if they have already login. So that notes has been connect with their user.
 "schemas.py" file define schema classes according to classes we have in "models.py" file.
