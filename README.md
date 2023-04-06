@@ -1,9 +1,11 @@
 # COMP0034 Coursework 2
 URL to repository: https://github.com/ucl-comp0035/comp0034-cw2-i-Shizuka-moto.git
 Method of managing dependencies and environments: venv and pip with requirements.txt and setup.py
+
 # Set-up instructions
-All function packages were preinstalled.
 1. Decompress and open the repository folder (in this case, "comp0034-cw1-i-Shizuka-moto") in your code editor.
+Type "pip install -r requirements.txt" in the terminal.
+Then type "pip install -e ."
 ![image](progress.png)
 2. To run the dash app, simply type "python main.py" in the terminal. Then open the link provide by terminal.
 ![image](folder.png)
